@@ -1,0 +1,196 @@
+/* Estilos de la plataforma (complementan base.css). */
+.admin { background: var(--gris); min-height: 100vh; }
+[hidden] { display: none !important; }
+
+/* Fondo de marca reutilizable: degradado institucional + patrón + destellos de color. */
+.fondo-marca {
+  position: relative; isolation: isolate; color: var(--blanco); overflow: hidden;
+  background:
+    radial-gradient(circle at 85% 15%, rgba(179, 18, 46, 0.55), transparent 40%),
+    radial-gradient(circle at 10% 90%, rgba(70, 120, 220, 0.35), transparent 45%),
+    linear-gradient(135deg, #061a42 0%, var(--azul) 55%, #123d8f 100%);
+}
+.fondo-marca::before {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background: url("../img/patron.svg") repeat; background-size: 160px;
+  animation: deslizar 60s linear infinite;
+}
+@keyframes deslizar { to { background-position: 160px 160px; } }
+@media (prefers-reduced-motion: reduce) { .fondo-marca::before { animation: none; } }
+
+/* ---- Barra superior ---- */
+.barra {
+  color: var(--blanco); border-bottom: 4px solid var(--rojo);
+  background: url("../img/patron.svg") repeat, linear-gradient(135deg, #061a42, var(--azul) 60%, #123d8f);
+  background-size: 160px, auto;
+}
+.barra__fila { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding-top: 10px; padding-bottom: 10px; }
+.barra__marca { display: flex; align-items: center; gap: 8px; font-weight: 700; }
+.barra__marca img { object-fit: contain; filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.35)); }
+.barra__acciones { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.barra__usuario { font-size: 0.9rem; opacity: 0.9; }
+
+/* ---- Panel ---- */
+.panel { padding-top: 24px; padding-bottom: 48px; }
+.panel h1 { font-size: 1.5rem; margin: 0 0 16px; }
+.panel__cabecera { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+.panel__herramientas { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+
+.boton--chico { padding: 6px 12px; font-size: 0.9rem; }
+.boton--ancho { width: 100%; }
+.boton--borde { border-color: var(--azul); }
+.boton--peligro { background: var(--blanco); color: var(--rojo); border-color: var(--rojo); }
+.boton--peligro:hover { background: #fde8eb; }
+.boton:disabled { opacity: 0.6; cursor: wait; }
+
+.mensaje { min-height: 1.5em; margin: 8px 0; font-weight: 600; }
+.panel > .mensaje:empty { min-height: 0; margin: 0; }
+.mensaje--ok { color: #136b2e; }
+.mensaje--error { color: var(--rojo); }
+
+/* ---- Tabla ---- */
+.tabla-envoltura { background: var(--blanco); border-radius: var(--radio); box-shadow: var(--sombra); overflow-x: auto; }
+.tabla { width: 100%; border-collapse: collapse; }
+.tabla th, .tabla td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--borde); vertical-align: middle; }
+.tabla th { background: var(--azul-claro); color: var(--azul-oscuro); font-size: 0.9rem; }
+.tabla td.acciones { white-space: nowrap; text-align: right; }
+.tabla td.acciones .boton { margin-left: 4px; }
+.estado-pill { padding: 2px 10px; border-radius: 999px; font-size: 0.8rem; font-weight: 700; }
+.estado-pill--publicado { background: #dff3e5; color: #136b2e; }
+.estado-pill--borrador { background: #fff3cd; color: #7a5b00; }
+
+/* En celulares, cada fila se muestra como tarjeta. */
+@media (max-width: 700px) {
+  .tabla thead { display: none; }
+  .tabla, .tabla tbody, .tabla tr, .tabla td { display: block; width: 100%; }
+  .tabla tr { border-bottom: 2px solid var(--borde); padding: 8px 0; }
+  .tabla td { border: none; padding: 4px 12px; }
+  .tabla td[data-col]::before { content: attr(data-col) ": "; font-weight: 700; color: var(--azul); }
+  .tabla td.acciones { text-align: left; }
+  .tabla td.acciones .boton { margin: 4px 4px 0 0; }
+}
+
+/* ---- Formularios ---- */
+.formulario { background: var(--blanco); padding: 20px; border-radius: var(--radio); box-shadow: var(--sombra); }
+.formulario__fila { display: grid; gap: 0 16px; }
+@media (min-width: 700px) { .formulario__fila { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); } }
+.formulario__acciones { display: flex; gap: 8px; flex-wrap: wrap; }
+.campo { margin: 0 0 14px; border: 0; padding: 0; }
+.campo label, .campo legend { display: block; font-weight: 600; margin-bottom: 4px; color: var(--azul-oscuro); }
+.campo input[type="text"], .campo input[type="password"], .campo input[type="date"],
+.campo select, .campo textarea, .panel__herramientas select {
+  width: 100%; padding: 9px 10px; border: 1px solid var(--borde); border-radius: 6px;
+  font: inherit; background: var(--blanco); color: var(--texto);
+}
+.panel__herramientas select { width: auto; }
+.campo textarea { resize: vertical; }
+.campo input:focus, .campo select:focus, .campo textarea:focus { border-color: var(--azul); outline: 2px solid var(--azul-claro); }
+.campo--invalido input, .campo--invalido select, .campo--invalido textarea { border-color: var(--rojo); }
+.campo__error { color: var(--rojo); font-size: 0.85rem; margin: 4px 0 0; min-height: 0; }
+.campo__ayuda { color: var(--texto-suave); font-size: 0.85rem; margin: 4px 0 0; }
+.contador { font-weight: 400; color: var(--texto-suave); font-size: 0.85rem; }
+.check { display: flex !important; align-items: center; gap: 8px; font-weight: 400 !important; color: var(--texto) !important; }
+.imagen-actual { margin-top: 8px; }
+.imagen-actual img { max-width: 260px; border-radius: 6px; border: 1px solid var(--borde); margin-bottom: 6px; }
+
+.estado-pill--reprobado { background: #fde8eb; color: var(--rojo); }
+.enlace { background: none; border: 0; padding: 0; color: var(--azul); text-decoration: underline; cursor: pointer; font: inherit; }
+.separado { margin-top: 24px; }
+.lista-errores { color: var(--rojo); font-size: 0.85rem; padding-left: 20px; }
+.campo--doble { grid-column: span 2; }
+@media (max-width: 699px) { .campo--doble { grid-column: auto; } }
+@media (min-width: 700px) { .formulario__fila--4 { grid-template-columns: repeat(4, 1fr); } }
+.formulario h2 { margin-top: 0; font-size: 1.15rem; }
+.dos-columnas { display: grid; gap: 20px; }
+@media (min-width: 900px) { .dos-columnas { grid-template-columns: 1fr 1fr; align-items: start; } }
+
+/* ---- Pestañas ---- */
+.pestanas { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; border-bottom: 2px solid var(--borde); margin-bottom: 16px; }
+.pestanas button { white-space: nowrap; flex-shrink: 0; }
+.pestanas button {
+  background: none; border: 0; border-bottom: 3px solid transparent; margin-bottom: -2px;
+  padding: 10px 14px; font: inherit; font-weight: 600; color: var(--texto-suave); cursor: pointer;
+}
+.pestanas button[aria-selected="true"] { color: var(--azul); border-bottom-color: var(--rojo); }
+.pestanas button:hover { color: var(--azul); }
+
+/* ---- Contraseñas temporales ---- */
+.claves { background: #fff8e1; border: 2px solid #e0b400; border-radius: var(--radio); padding: 16px; margin-bottom: 20px; }
+.claves h2 { margin: 0 0 4px; font-size: 1.1rem; }
+.claves code { font-size: 1rem; background: var(--blanco); padding: 2px 6px; border-radius: 4px; user-select: all; }
+.claves .formulario__acciones { margin-top: 12px; }
+
+/* ---- Notas (catedrático) ---- */
+.tabla--compacta td { font-size: 0.9rem; padding: 6px 10px; }
+.tabla--notas .celda { width: 5.5em; padding: 6px 8px; border: 1px solid var(--borde); border-radius: 6px; font: inherit; text-align: right; }
+.tabla--notas .celda:focus { border-color: var(--azul); outline: 2px solid var(--azul-claro); }
+.tabla--notas .celda--invalida { border-color: var(--rojo); background: #fde8eb; }
+.tabla--notas .total { font-weight: 700; color: var(--azul-oscuro); }
+.resumen-notas { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0 16px; }
+.resumen-notas div { background: var(--blanco); border-radius: 8px; padding: 8px 14px; box-shadow: var(--sombra); font-size: 0.9rem; }
+.resumen-notas strong { font-size: 1.15rem; color: var(--azul); }
+.barra-guardar { position: sticky; bottom: 0; background: var(--gris); padding: 12px 0; }
+
+/* ---- Bienvenida del estudiante ---- */
+.bienvenida {
+  border-radius: 18px; padding: 24px; margin-bottom: 24px; display: grid; gap: 20px; align-items: center;
+  box-shadow: 0 14px 40px rgba(11, 46, 111, 0.18);
+}
+@media (min-width: 760px) { .bienvenida { grid-template-columns: 1fr auto; padding: 28px 32px; } }
+.bienvenida h1 { color: var(--blanco); margin: 0 !important; font-size: clamp(1.6rem, 4vw, 2.2rem) !important; }
+.bienvenida__hola { margin: 0; opacity: 0.85; }
+.bienvenida__info { margin: 6px 0 0; opacity: 0.85; font-size: 0.92rem; }
+.bienvenida__datos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.dato {
+  background: rgba(255, 255, 255, 0.12); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 12px;
+  padding: 10px 14px; text-align: center; min-width: 96px;
+}
+.dato strong { display: block; font-size: 1.6rem; line-height: 1.1; }
+.dato span { font-size: 0.78rem; opacity: 0.85; }
+
+/* Tarjetas de curso del catedrático */
+.tarjeta--curso { border: 0; border-top: 5px solid #e0b400; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+.tarjeta--curso.tarjeta--publicada { border-top-color: #1e8e4a; }
+.tarjeta--curso:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(11, 46, 111, 0.15); }
+.tarjeta--curso .tarjeta__titulo { font-size: 1.15rem; }
+.tarjeta__pie { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 4px; }
+
+/* Barra de total sobre 100 con marca en la nota de aprobación */
+.progreso { position: relative; height: 12px; background: var(--azul-claro); border-radius: 999px; margin: 14px 0 34px; }
+.progreso__barra { display: block; height: 100%; border-radius: inherit; width: 0; transition: width 0.8s ease; }
+.progreso__barra--ok { background: linear-gradient(90deg, #1e8e4a, #36b36a); }
+.progreso__barra--mal { background: linear-gradient(90deg, var(--rojo), #e04a63); }
+.progreso__barra--curso { background: linear-gradient(90deg, var(--azul), #3f7be0); }
+.progreso__meta { position: absolute; top: -4px; bottom: -4px; width: 2px; background: var(--azul-oscuro); }
+.progreso__meta span {
+  position: absolute; top: 100%; left: 50%; transform: translateX(-50%); margin-top: 4px;
+  font-size: 0.7rem; color: var(--texto-suave); white-space: nowrap;
+}
+
+/* ---- Notas (estudiante) ---- */
+.curso-notas {
+  background: var(--blanco); border-radius: var(--radio); box-shadow: var(--sombra);
+  padding: 16px 20px; margin-bottom: 16px; border-left: 5px solid var(--azul);
+}
+.curso-notas--pendiente { border-left-color: var(--borde); }
+.curso-notas h2 { margin: 6px 0; font-size: 1.15rem; }
+.curso-notas__titulo { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+.desglose { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin: 12px 0 4px; }
+@media (min-width: 700px) { .desglose { grid-template-columns: repeat(5, 1fr); } }
+.desglose dt { font-size: 0.8rem; color: var(--texto-suave); grid-row: 1; }
+.desglose dd { margin: 0; grid-row: 2; }
+@media (max-width: 699px) { .desglose dt, .desglose dd { grid-row: auto; } }
+.desglose strong { font-size: 1.2rem; color: var(--azul-oscuro); }
+.desglose__total strong { color: var(--rojo); }
+
+@media print {
+  .barra, .aviso-proyecto ~ .barra button, .no-imprimir, .cuenta, #mensaje { display: none !important; }
+  .admin { background: #fff; }
+  .bienvenida { background: none !important; color: #000; box-shadow: none; border: 1px solid #999; }
+  .bienvenida::before { display: none; }
+  .bienvenida h1, .dato { color: #000 !important; }
+  .curso-notas { box-shadow: none; border: 1px solid #999; break-inside: avoid; }
+}
+
+.cuenta { margin-top: 32px; }
+.cuenta summary { cursor: pointer; font-weight: 600; color: var(--azul); margin-bottom: 12px; }

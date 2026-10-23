@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Plataforma de notas — Sede Central</title>
+  <meta name="description" content="Proyecto estudiantil: plataforma para publicar y consultar notas. No es un sistema oficial.">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/portal.css">
+  <link rel="stylesheet" href="assets/css/acceso.css">
+</head>
+<body class="pagina-acceso">
+  <div class="aviso-proyecto" role="note">Proyecto estudiantil · No es un sistema oficial · Datos ficticios</div>
+
+  <header class="hero fondo-marca">
+    <div class="contenedor hero__barra">
+      <a class="hero__marca" href="./">
+        <!-- Reemplazá assets/img/logo-umg.png por el logotipo autorizado. -->
+        <img class="marca-logo" src="assets/img/logo-umg.png" alt="Logo Universidad Mariano Gálvez de Guatemala" width="52" height="52">
+        <span class="hero__nombre">Plataforma de notas <small>Sede Central</small></span>
+      </a>
+      <a class="hero__admin" href="ingresar?tipo=admin">Administración</a>
+    </div>
+
+    <div class="contenedor hero__contenido">
+      <div>
+        <p class="hero__etiqueta">Notas en línea</p>
+        <h1>Tus notas, <em>en cuanto se publican</em>.</h1>
+        <p class="hero__lema">El catedrático ingresa y publica las calificaciones; cada estudiante las consulta desde cualquier dispositivo, con su carné.</p>
+      </div>
+
+      <!-- Vista previa decorativa con datos de ejemplo. -->
+      <div class="hero__vista" aria-hidden="true">
+        <div class="ficha ficha--a">
+          <div class="ficha__cabeza">
+            <span class="ficha__curso">Programación I<span class="ficha__codigo">PROG-101 · Sección A</span></span>
+            <span class="estado-pill estado-pill--publicado">Aprobado</span>
+          </div>
+          <div class="ficha__total">87 <small>/ 100</small></div>
+          <div class="barra-progreso barra-progreso--87"><span></span></div>
+          <span class="ficha__ejemplo">Ejemplo</span>
+        </div>
+        <div class="ficha ficha--b">
+          <div class="ficha__aviso">
+            <span class="ficha__check"><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg></span>
+            <span>Notas publicadas<small>Matemática I · hace un momento</small></span>
+          </div>
+        </div>
+        <div class="ficha ficha--c">
+          <div class="ficha__fila"><span>1er parcial</span><b>13 / 15</b></div>
+          <div class="ficha__fila"><span>2do parcial</span><b>12 / 15</b></div>
+          <div class="ficha__fila"><span>Actividades</span><b>32 / 35</b></div>
+          <div class="ficha__fila"><span>Examen final</span><b>30 / 35</b></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="contenedor inicio">
+    <div class="accesos">
+      <article class="acceso acceso--estudiante">
+        <svg class="acceso__icono" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 1 9l11 6 9-4.9V17h2V9L12 3zm-7 9.2V16c0 1.7 3.1 3 7 3s7-1.3 7-3v-3.8l-7 3.8-7-3.8z"/></svg>
+        <h2>Soy estudiante</h2>
+        <p>Consultá tus calificaciones de cada curso.</p>
+        <ul>
+          <li>Parciales, actividades y examen final</li>
+          <li>Total y estado de cada curso</li>
+          <li>Ingresás con tu carné</li>
+        </ul>
+        <a class="boton boton--rojo boton--grande" href="ingresar?tipo=estudiante">Ver mis notas →</a>
+      </article>
+
+      <article class="acceso acceso--docente">
+        <svg class="acceso__icono" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17.25V21h3.75L17.8 9.94l-3.75-3.75L3 17.25zM20.7 7.04a1 1 0 0 0 0-1.41l-2.33-2.34a1 1 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.82-1.83z"/></svg>
+        <h2>Soy catedrático</h2>
+        <p>Ingresá y publicá las notas de tus cursos.</p>
+        <ul>
+          <li>Total y estado calculados al instante</li>
+          <li>Publicás cuando estén listas</li>
+          <li>Cada cambio queda registrado</li>
+        </ul>
+        <a class="boton boton--azul boton--grande" href="ingresar?tipo=docente">Ingresar notas →</a>
+      </article>
+    </div>
+  </main>
+
+  <footer class="pie-acceso">
+    Plataforma de notas · Sede Central · Proyecto estudiantil sin carácter oficial
+  </footer>
+</body>
+</html>

@@ -1,0 +1,21 @@
+{
+  "name": "plataforma-notas-sede-central",
+  "version": "2.0.0",
+  "description": "Proyecto estudiantil: plataforma para publicar y consultar notas (calificaciones). No es un sistema oficial.",
+  "main": "server.js",
+  "private": true,
+  "scripts": {
+    "start": "node --disable-warning=ExperimentalWarning server.js",
+    "dev": "node --disable-warning=ExperimentalWarning --watch server.js",
+    "demo": "node --disable-warning=ExperimentalWarning scripts/demo.js"
+  },
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "express-session": "^1.18.1",
+    "helmet": "^8.1.0"
+  },
+  "license": "MIT"
+}

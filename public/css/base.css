@@ -1,0 +1,69 @@
+/* Estilos base. Colores institucionales: rojo, azul y blanco. Ajustá las variables si cambia la paleta. */
+:root {
+  --azul: #0b2e6f;
+  --azul-oscuro: #071f4d;
+  --azul-claro: #e8eef9;
+  --rojo: #b3122e;
+  --rojo-oscuro: #8e0e24;
+  --blanco: #ffffff;
+  --gris: #f4f6fa;
+  --borde: #d9dfea;
+  --texto: #1b2433;
+  --texto-suave: #556075;
+  --radio: 10px;
+  --sombra: 0 2px 10px rgba(11, 46, 111, 0.08);
+  --fuente: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: var(--fuente);
+  color: var(--texto);
+  background: var(--blanco);
+  line-height: 1.6;
+}
+img { max-width: 100%; height: auto; display: block; }
+a { color: var(--azul); }
+h1, h2, h3 { line-height: 1.25; color: var(--azul-oscuro); }
+
+.contenedor { width: 100%; max-width: 1120px; margin: 0 auto; padding: 0 16px; }
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap;
+}
+:focus-visible { outline: 3px solid var(--rojo); outline-offset: 2px; }
+
+.aviso-proyecto {
+  background: var(--rojo); color: var(--blanco);
+  font-size: 0.85rem; text-align: center; padding: 6px 16px;
+}
+
+/* ---- Botones ---- */
+.boton {
+  display: inline-block; padding: 10px 20px; border-radius: 8px; font-weight: 600;
+  text-decoration: none; border: 2px solid transparent; cursor: pointer; font: inherit;
+}
+.boton--rojo { background: var(--rojo); color: var(--blanco); }
+.boton--rojo:hover { background: var(--rojo-oscuro); }
+.boton--claro { background: var(--blanco); color: var(--azul); }
+.boton--claro:hover { background: var(--azul-claro); }
+
+.cargando, .vacio { color: var(--texto-suave); font-style: italic; }
+
+/* ---- Tarjetas ---- */
+.tarjetas { display: grid; gap: 20px; }
+@media (min-width: 640px) { .tarjetas { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 960px) { .tarjetas { grid-template-columns: repeat(3, 1fr); } }
+.tarjeta {
+  background: var(--blanco); border: 1px solid var(--borde); border-radius: var(--radio);
+  overflow: hidden; display: flex; flex-direction: column; box-shadow: var(--sombra);
+}
+.tarjeta__cuerpo { padding: 16px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+.tarjeta__titulo { margin: 0; font-size: 1.1rem; }
+.tarjeta__resumen { margin: 0; color: var(--texto-suave); flex: 1; }
+.meta { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; font-size: 0.85rem; color: var(--texto-suave); }
+.categoria {
+  background: var(--azul-claro); color: var(--azul); font-weight: 700;
+  padding: 1px 10px; border-radius: 999px; font-size: 0.8rem;
+}

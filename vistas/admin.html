@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Administración — Plataforma de notas</title>
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/portal.css">
+  <script src="assets/js/comun.js" defer></script>
+  <script src="assets/js/admin-usuarios.js" defer></script>
+  <script src="assets/js/admin-cursos.js" defer></script>
+  <script src="assets/js/admin-bitacora.js" defer></script>
+  <script src="assets/js/admin.js" defer></script>
+</head>
+<body class="admin">
+  <div class="aviso-proyecto" role="note">Sistema de práctica estudiantil · No es un sistema oficial · Usar solo datos ficticios</div>
+  <header class="barra">
+    <div class="contenedor barra__fila">
+      <div class="barra__marca">
+        <img src="assets/img/logo-umg.png" alt="" width="36" height="36">
+        <span>Administración · Plataforma de notas</span>
+      </div>
+      <div class="barra__acciones">
+        <span class="barra__usuario" id="usuario-actual"></span>
+        <button class="boton boton--rojo boton--chico" type="button" id="btn-salir">Cerrar sesión</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="contenedor panel">
+    <nav class="pestanas" role="tablist" aria-label="Secciones">
+      <button type="button" role="tab" id="tab-cursos" aria-controls="sec-cursos" data-tab="cursos">Cursos</button>
+      <button type="button" role="tab" id="tab-usuarios" aria-controls="sec-usuarios" data-tab="usuarios">Usuarios</button>
+      <button type="button" role="tab" id="tab-bitacora" aria-controls="sec-bitacora" data-tab="bitacora">Bitácora</button>
+    </nav>
+
+    <p class="mensaje" id="mensaje" role="status" aria-live="polite"></p>
+    <section class="claves" id="claves-temporales" hidden aria-live="polite"></section>
+
+    <!-- ===================== CURSOS ===================== -->
+    <section id="sec-cursos" role="tabpanel" aria-labelledby="tab-cursos" hidden>
+      <div id="cur-lista">
+        <div class="panel__cabecera">
+          <h1>Cursos</h1>
+          <div class="panel__herramientas">
+            <button class="boton boton--rojo" type="button" id="cur-nuevo">+ Nuevo curso</button>
+          </div>
+        </div>
+        <div class="tabla-envoltura">
+          <table class="tabla">
+            <thead><tr><th>Curso</th><th>Sección</th><th>Ciclo</th><th>Catedrático</th><th>Estudiantes</th><th>Notas</th><th><span class="visually-hidden">Acciones</span></th></tr></thead>
+            <tbody id="cur-tabla"><tr><td colspan="7" class="cargando">Cargando…</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div id="cur-form-vista" hidden>
+        <h1 id="cur-form-titulo">Nuevo curso</h1>
+        <form id="cur-form" class="formulario" novalidate>
+          <div class="formulario__fila">
+            <div class="campo">
+              <label for="cur-codigo">Código *</label>
+              <input id="cur-codigo" name="codigo" type="text" required maxlength="20" placeholder="Ej.: PROG-101">
+              <p class="campo__error" data-error="codigo"></p>
+            </div>
+            <div class="campo campo--doble">
+              <label for="cur-nombre">Nombre del curso *</label>
+              <input id="cur-nombre" name="nombre" type="text" required minlength="3" maxlength="120">
+              <p class="campo__error" data-error="nombre"></p>
+            </div>
+          </div>
+          <div class="formulario__fila">
+            <div class="campo">
+              <label for="cur-seccion">Sección *</label>
+              <input id="cur-seccion" name="seccion" type="text" required maxlength="5" value="A">
+              <p class="campo__error" data-error="seccion"></p>
+            </div>
+            <div class="campo">
+              <label for="cur-ciclo">Ciclo *</label>
+              <input id="cur-ciclo" name="ciclo" type="text" required maxlength="40" placeholder="Ej.: 2026 - Segundo semestre">
+              <p class="campo__error" data-error="ciclo"></p>
+            </div>
+            <div class="campo">
+              <label for="cur-docente">Catedrático</label>
+              <select id="cur-docente" name="docente_id"></select>
+              <p class="campo__error" data-error="docente_id"></p>
+            </div>
+          </div>
+          <fieldset class="campo">
+            <legend>Distribución de punteo (debe sumar 100) — valores de ejemplo, ajustalos al reglamento</legend>
+            <div class="formulario__fila formulario__fila--4">
+              <div class="campo"><label for="cur-max_p1">1er parcial</label><input id="cur-max_p1" name="max_p1" type="number" min="0" max="100" step="0.01" value="15"><p class="campo__error" data-error="max_p1"></p></div>
+              <div class="campo"><label for="cur-max_p2">2do parcial</label><input id="cur-max_p2" name="max_p2" type="number" min="0" max="100" step="0.01" value="15"><p class="campo__error" data-error="max_p2"></p></div>
+              <div class="campo"><label for="cur-max_act">Actividades</label><input id="cur-max_act" name="max_act" type="number" min="0" max="100" step="0.01" value="35"><p class="campo__error" data-error="max_act"></p></div>
+              <div class="campo"><label for="cur-max_final">Examen final</label><input id="cur-max_final" name="max_final" type="number" min="0" max="100" step="0.01" value="35"><p class="campo__error" data-error="max_final"></p></div>
+            </div>
+            <p class="campo__ayuda" id="cur-suma"></p>
+          </fieldset>
+          <div class="formulario__acciones">
+            <button class="boton boton--rojo" type="submit">Guardar curso</button>
+            <button class="boton boton--claro boton--borde" type="button" id="cur-cancelar">Cancelar</button>
+          </div>
+        </form>
+      </div>
+
+      <div id="cur-estudiantes-vista" hidden>
+        <h1 id="cur-estudiantes-titulo">Estudiantes del curso</h1>
+        <form id="cur-asignar" class="formulario" novalidate>
+          <div class="campo">
+            <label for="cur-carnes">Agregar estudiantes por carné</label>
+            <textarea id="cur-carnes" rows="3" placeholder="Un carné por línea, o separados por coma"></textarea>
+            <p class="campo__ayuda">Los estudiantes deben tener cuenta creada (pestaña Usuarios).</p>
+          </div>
+          <div class="formulario__acciones">
+            <button class="boton boton--rojo" type="submit">Agregar al curso</button>
+            <button class="boton boton--claro boton--borde" type="button" id="cur-volver">← Volver a cursos</button>
+          </div>
+        </form>
+        <div class="tabla-envoltura separado">
+          <table class="tabla">
+            <thead><tr><th>Carné</th><th>Nombre</th><th><span class="visually-hidden">Acciones</span></th></tr></thead>
+            <tbody id="cur-estudiantes-tabla"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== USUARIOS ===================== -->
+    <section id="sec-usuarios" role="tabpanel" aria-labelledby="tab-usuarios" hidden>
+      <div class="panel__cabecera">
+        <h1>Usuarios</h1>
+        <div class="panel__herramientas">
+          <label class="visually-hidden" for="usu-filtro">Filtrar por rol</label>
+          <select id="usu-filtro">
+            <option value="">Todos los roles</option>
+            <option value="estudiante">Estudiantes</option>
+            <option value="docente">Catedráticos</option>
+            <option value="admin">Administradores</option>
+          </select>
+          <input id="usu-buscar" type="search" placeholder="Buscar nombre o carné" aria-label="Buscar usuario">
+        </div>
+      </div>
+      <div class="tabla-envoltura">
+        <table class="tabla">
+          <thead><tr><th>Usuario / carné</th><th>Nombre</th><th>Rol</th><th>Estado</th><th><span class="visually-hidden">Acciones</span></th></tr></thead>
+          <tbody id="usu-tabla"><tr><td colspan="5" class="cargando">Cargando…</td></tr></tbody>
+        </table>
+      </div>
+
+      <div class="dos-columnas separado">
+        <form id="usu-form" class="formulario" novalidate>
+          <h2>Nuevo usuario</h2>
+          <div class="campo">
+            <label for="usu-rol">Rol *</label>
+            <select id="usu-rol" name="rol">
+              <option value="estudiante">Estudiante</option>
+              <option value="docente">Catedrático</option>
+              <option value="admin">Administrador</option>
+            </select>
+            <p class="campo__error" data-error="rol"></p>
+          </div>
+          <div class="campo">
+            <label for="usu-usuario">Usuario (para estudiantes, el carné) *</label>
+            <input id="usu-usuario" name="usuario" type="text" required minlength="3" maxlength="50" autocomplete="off">
+            <p class="campo__error" data-error="usuario"></p>
+          </div>
+          <div class="campo">
+            <label for="usu-nombre">Nombre completo *</label>
+            <input id="usu-nombre" name="nombre" type="text" required minlength="3" maxlength="100" autocomplete="off">
+            <p class="campo__error" data-error="nombre"></p>
+          </div>
+          <button class="boton boton--rojo" type="submit">Crear usuario</button>
+        </form>
+
+        <form id="usu-lote" class="formulario" novalidate>
+          <h2>Cargar estudiantes en lote</h2>
+          <div class="campo">
+            <label for="usu-lote-texto">Una línea por estudiante: <code>carné, nombre completo</code></label>
+            <textarea id="usu-lote-texto" rows="7" placeholder="DEMO-0001, Estudiante Ficticio Uno&#10;DEMO-0002, Estudiante Ficticio Dos"></textarea>
+            <p class="campo__ayuda">Máximo 200 por carga. Se puede pegar desde Excel (carné y nombre en dos columnas).</p>
+          </div>
+          <button class="boton boton--rojo" type="submit">Crear cuentas</button>
+          <div id="usu-lote-rechazados"></div>
+        </form>
+      </div>
+    </section>
+
+    <!-- ===================== BITÁCORA ===================== -->
+    <section id="sec-bitacora" role="tabpanel" aria-labelledby="tab-bitacora" hidden>
+      <div class="panel__cabecera">
+        <h1>Bitácora</h1>
+        <div class="panel__herramientas">
+          <input id="bit-buscar" type="search" placeholder="Filtrar (usuario, acción, curso…)" aria-label="Filtrar bitácora">
+          <button class="boton boton--claro boton--borde" type="button" id="bit-actualizar">Actualizar</button>
+        </div>
+      </div>
+      <p class="campo__ayuda">Últimos 300 eventos: ingresos, cambios de notas, publicación de notas y gestión de cuentas.</p>
+      <div class="tabla-envoltura">
+        <table class="tabla tabla--compacta">
+          <thead><tr><th>Fecha</th><th>Usuario</th><th>IP</th><th>Acción</th><th>Detalle</th></tr></thead>
+          <tbody id="bit-tabla"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Cuenta propia -->
+    <details class="cuenta">
+      <summary>Cambiar mi contraseña</summary>
+      <form id="form-clave" class="formulario" novalidate>
+        <div class="formulario__fila">
+          <div class="campo"><label for="clave-actual">Contraseña actual</label><input id="clave-actual" name="actual" type="password" autocomplete="current-password" required maxlength="200"></div>
+          <div class="campo"><label for="clave-nueva">Nueva contraseña (mínimo 12)</label><input id="clave-nueva" name="nueva" type="password" autocomplete="new-password" required minlength="12" maxlength="200"></div>
+          <div class="campo"><label for="clave-repetir">Repetir nueva contraseña</label><input id="clave-repetir" name="repetir" type="password" autocomplete="new-password" required minlength="12" maxlength="200"></div>
+        </div>
+        <button class="boton boton--rojo" type="submit">Actualizar contraseña</button>
+      </form>
+    </details>
+  </main>
+</body>
+</html>

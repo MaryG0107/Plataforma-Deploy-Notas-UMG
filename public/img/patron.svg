@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 160 160">
+  <!-- Patrón decorativo de fondo: íconos académicos en blanco muy tenue. -->
+  <g fill="none" stroke="#ffffff" stroke-opacity="0.09" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <!-- birrete -->
+    <path d="M14 30 34 21l20 9-20 9z"/>
+    <path d="M22 34v8c0 3 6 5 12 5s12-2 12-5v-8"/>
+    <path d="M54 30v10"/>
+    <!-- lápiz -->
+    <path d="M100 52 124 28l6 6-24 24-8 2z"/>
+    <path d="M119 33l6 6"/>
+    <!-- libro abierto -->
+    <path d="M18 112c8-4 16-4 24 0v24c-8-4-16-4-24 0z"/>
+    <path d="M42 112c8-4 16-4 24 0v24c-8-4-16-4-24 0"/>
+    <!-- visto bueno -->
+    <circle cx="116" cy="118" r="14"/>
+    <path d="M109 118l5 5 9-10"/>
+    <!-- puntos -->
+    <circle cx="80" cy="84" r="2"/>
+    <circle cx="150" cy="80" r="2"/>
+    <circle cx="80" cy="150" r="2"/>
+  </g>
+</svg>

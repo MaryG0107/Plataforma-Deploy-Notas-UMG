@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Catedrático — Plataforma de notas</title>
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/portal.css">
+  <script src="assets/js/comun.js" defer></script>
+  <script src="assets/js/docente.js" defer></script>
+</head>
+<body class="admin">
+  <div class="aviso-proyecto" role="note">Sistema de práctica estudiantil · No es un sistema oficial · Usar solo datos ficticios</div>
+  <header class="barra">
+    <div class="contenedor barra__fila">
+      <div class="barra__marca">
+        <img src="assets/img/logo-umg.png" alt="" width="36" height="36">
+        <span>Catedrático · Plataforma de notas</span>
+      </div>
+      <div class="barra__acciones">
+        <span class="barra__usuario" id="usuario-actual"></span>
+        <button class="boton boton--rojo boton--chico" type="button" id="btn-salir">Cerrar sesión</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="contenedor panel">
+    <p class="mensaje" id="mensaje" role="status" aria-live="polite"></p>
+
+    <section id="vista-cursos" aria-labelledby="t-cursos">
+      <div class="bienvenida fondo-marca">
+        <div>
+          <p class="bienvenida__hola" id="saludo">Hola</p>
+          <h1 id="t-cursos">Mis cursos</h1>
+          <p class="bienvenida__info">Ingresá las notas, guardalas y publicalas cuando estén listas.</p>
+        </div>
+        <div class="bienvenida__datos" id="resumen-docente"></div>
+      </div>
+      <div class="tarjetas" id="lista-cursos"><p class="cargando">Cargando…</p></div>
+    </section>
+
+    <section id="vista-notas" hidden aria-labelledby="t-curso">
+      <button class="enlace" type="button" id="btn-volver">← Mis cursos</button>
+      <div class="panel__cabecera">
+        <div>
+          <h1 id="t-curso"></h1>
+          <p class="campo__ayuda" id="info-curso"></p>
+        </div>
+        <span id="estado-publicacion"></span>
+      </div>
+
+      <div class="resumen-notas" id="resumen-notas"></div>
+
+      <form id="form-notas" novalidate>
+        <div class="tabla-envoltura">
+          <table class="tabla tabla--notas">
+            <thead><tr id="encabezado-notas"></tr></thead>
+            <tbody id="tabla-notas"></tbody>
+          </table>
+        </div>
+        <p class="campo__ayuda">Dejá vacío lo que aún no se evaluó. Hasta 2 decimales. El total y el estado se calculan solos.</p>
+        <div class="formulario__acciones barra-guardar">
+          <button class="boton boton--rojo" type="submit" id="btn-guardar">Guardar notas</button>
+          <button class="boton boton--claro boton--borde" type="button" id="btn-publicar"></button>
+        </div>
+      </form>
+    </section>
+
+    <details class="cuenta">
+      <summary>Cambiar mi contraseña</summary>
+      <form id="form-clave" class="formulario" novalidate>
+        <div class="formulario__fila">
+          <div class="campo"><label for="clave-actual">Contraseña actual</label><input id="clave-actual" name="actual" type="password" autocomplete="current-password" required maxlength="200"></div>
+          <div class="campo"><label for="clave-nueva">Nueva contraseña (mínimo 12)</label><input id="clave-nueva" name="nueva" type="password" autocomplete="new-password" required minlength="12" maxlength="200"></div>
+          <div class="campo"><label for="clave-repetir">Repetir nueva contraseña</label><input id="clave-repetir" name="repetir" type="password" autocomplete="new-password" required minlength="12" maxlength="200"></div>
+        </div>
+        <button class="boton boton--rojo" type="submit">Actualizar contraseña</button>
+      </form>
+    </details>
+  </main>
+</body>
+</html>

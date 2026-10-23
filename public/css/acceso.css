@@ -1,0 +1,150 @@
+/* Portada, pantallas de ingreso y cambio de contraseña. Complementa base.css y portal.css. */
+.pagina-acceso { --acento: var(--rojo); --acento-oscuro: var(--rojo-oscuro); background: var(--gris); min-height: 100vh; }
+.pagina-acceso.tipo--docente, .pagina-acceso.tipo--admin { --acento: var(--azul); --acento-oscuro: var(--azul-oscuro); }
+
+.boton--azul { background: var(--azul); color: var(--blanco); }
+.boton--azul:hover { background: var(--azul-oscuro); }
+.boton--grande { padding: 14px 28px; font-size: 1.05rem; }
+.boton--acento { background: var(--acento); color: var(--blanco); }
+.boton--acento:hover { background: var(--acento-oscuro); }
+.boton { transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease; }
+.boton--grande:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(7, 31, 77, 0.25); }
+
+/* Sello circular con fondo transparente: solo sombra, sin recuadro. */
+.marca-logo { object-fit: contain; border-radius: 50%; filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.35)); }
+
+/* Tarjetas de notas de ejemplo que flotan sobre el fondo. */
+.ficha {
+  background: rgba(255, 255, 255, 0.97); color: var(--texto); border-radius: 14px; padding: 14px 16px;
+  box-shadow: 0 18px 40px rgba(3, 14, 38, 0.35); width: 250px; font-size: 0.9rem;
+  animation: flotar 7s ease-in-out infinite;
+}
+.ficha--b { animation-delay: -2.5s; }
+.ficha--c { animation-delay: -4.5s; }
+.ficha__cabeza { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 8px; }
+.ficha__curso { font-weight: 700; color: var(--azul-oscuro); }
+.ficha__codigo { font-size: 0.75rem; color: var(--texto-suave); display: block; font-weight: 400; }
+.ficha__total { font-size: 1.8rem; font-weight: 800; color: var(--azul); line-height: 1; }
+.ficha__total small { font-size: 0.85rem; color: var(--texto-suave); font-weight: 600; }
+.ficha__fila { display: flex; justify-content: space-between; padding: 3px 0; border-bottom: 1px dashed var(--borde); }
+.ficha__fila:last-child { border: 0; }
+.ficha__fila b { color: var(--azul-oscuro); }
+.ficha__aviso { display: flex; align-items: center; gap: 10px; font-weight: 600; color: var(--azul-oscuro); }
+.ficha__aviso small { display: block; font-weight: 400; color: var(--texto-suave); }
+.ficha__check { flex-shrink: 0; width: 34px; height: 34px; border-radius: 50%; background: #dff3e5; display: grid; place-items: center; }
+.ficha__check svg { width: 18px; height: 18px; fill: none; stroke: #136b2e; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.ficha__ejemplo { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--texto-suave); }
+@keyframes flotar { 0%, 100% { transform: translateY(0) rotate(var(--giro, 0deg)); } 50% { transform: translateY(-12px) rotate(var(--giro, 0deg)); } }
+
+.barra-progreso { height: 8px; background: var(--azul-claro); border-radius: 999px; overflow: hidden; margin: 8px 0 4px; }
+.barra-progreso span { display: block; height: 100%; background: linear-gradient(90deg, var(--azul), #3f7be0); border-radius: inherit; }
+.barra-progreso--87 span { width: 87%; }
+
+/* ================= Portada ================= */
+.hero { padding-bottom: 120px; }
+.hero__barra { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 76px; }
+.hero__marca { display: flex; align-items: center; gap: 12px; color: var(--blanco); text-decoration: none; }
+.hero__nombre { display: flex; flex-direction: column; line-height: 1.15; font-weight: 700; font-size: 1.1rem; }
+.hero__nombre small { font-weight: 500; opacity: 0.8; font-size: 0.85rem; }
+.hero__admin { color: rgba(255, 255, 255, 0.85); font-size: 0.9rem; text-decoration: none; border: 1px solid rgba(255, 255, 255, 0.35); padding: 6px 12px; border-radius: 999px; }
+.hero__admin:hover { background: rgba(255, 255, 255, 0.12); color: var(--blanco); }
+
+.hero__contenido { display: grid; gap: 40px; align-items: center; padding-top: 32px; }
+.hero__etiqueta {
+  display: inline-flex; align-items: center; gap: 8px; background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25); padding: 4px 12px; border-radius: 999px; font-size: 0.85rem; margin: 0;
+}
+.hero__etiqueta::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #5ee08a; box-shadow: 0 0 0 4px rgba(94, 224, 138, 0.25); }
+.hero h1 { color: var(--blanco); font-size: clamp(2rem, 5vw, 3.3rem); line-height: 1.1; margin: 16px 0; letter-spacing: -0.01em; }
+.hero h1 em { font-style: normal; background: linear-gradient(90deg, #ff9aa9, #ffd1d8); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.hero__lema { font-size: 1.15rem; opacity: 0.9; max-width: 46ch; margin: 0; }
+
+.hero__vista { position: relative; height: 330px; display: none; }
+.hero__vista .ficha { position: absolute; }
+.hero__vista .ficha--a { top: 10px; left: 8%; --giro: -3deg; }
+.hero__vista .ficha--b { top: 150px; right: 0; --giro: 2deg; width: 270px; }
+.hero__vista .ficha--c { bottom: -10px; left: 0; --giro: 1deg; width: 230px; }
+@media (min-width: 900px) {
+  .hero__contenido { grid-template-columns: 1.1fr 1fr; padding-top: 40px; }
+  .hero__vista { display: block; }
+}
+
+.inicio { margin-top: -84px; padding-bottom: 32px; position: relative; }
+.accesos { display: grid; gap: 24px; max-width: 900px; margin: 0 auto; }
+@media (min-width: 700px) { .accesos { grid-template-columns: 1fr 1fr; } }
+.acceso {
+  --acento: var(--rojo);
+  background: var(--blanco); border-radius: 18px; box-shadow: 0 14px 40px rgba(11, 46, 111, 0.16);
+  padding: 32px 28px; display: flex; flex-direction: column; gap: 10px; position: relative; overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.acceso::after {
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 6px;
+  background: linear-gradient(90deg, var(--acento), color-mix(in srgb, var(--acento) 55%, white));
+}
+.acceso:hover { transform: translateY(-4px); box-shadow: 0 20px 48px rgba(11, 46, 111, 0.22); }
+.acceso--docente { --acento: var(--azul); }
+.acceso__icono {
+  width: 60px; height: 60px; padding: 14px; border-radius: 16px; fill: var(--blanco);
+  background: linear-gradient(135deg, var(--acento), color-mix(in srgb, var(--acento) 70%, black));
+}
+.acceso h2 { margin: 6px 0 0; font-size: 1.5rem; }
+.acceso p { color: var(--texto-suave); margin: 0; flex: 1; }
+.acceso ul { margin: 0 0 12px; padding: 0; list-style: none; display: grid; gap: 6px; font-size: 0.92rem; }
+.acceso li { display: flex; gap: 8px; align-items: baseline; }
+.acceso li::before { content: "✓"; color: var(--acento); font-weight: 800; }
+.acceso .boton { align-self: flex-start; }
+
+.pie-acceso { text-align: center; padding: 32px 16px; font-size: 0.85rem; color: var(--texto-suave); }
+
+/* ================= Ingreso (pantalla dividida) ================= */
+.split { display: grid; min-height: calc(100vh - 34px); }
+@media (min-width: 900px) { .split { grid-template-columns: 1.05fr 1fr; } }
+.split__marca { padding: 24px 24px 28px; display: flex; flex-direction: column; gap: 16px; }
+.split__volver { color: rgba(255, 255, 255, 0.85); text-decoration: none; font-size: 0.9rem; align-self: flex-start; }
+.split__volver:hover { color: var(--blanco); text-decoration: underline; }
+.split__titulo { display: flex; align-items: center; gap: 12px; }
+.split__titulo h2 { color: var(--blanco); margin: 0; font-size: 1.4rem; }
+.split__titulo small { display: block; opacity: 0.8; font-weight: 500; font-size: 0.85rem; }
+.split__lema { font-size: clamp(1.4rem, 3vw, 2.2rem); font-weight: 700; line-height: 1.2; margin: 0; max-width: 20ch; }
+.split__fichas { display: none; position: relative; flex: 1; min-height: 280px; }
+.split__fichas .ficha { position: absolute; }
+.split__fichas .ficha--a { top: 0; left: 4%; --giro: -2deg; }
+.split__fichas .ficha--b { top: 150px; left: 32%; --giro: 2deg; width: 270px; }
+@media (min-width: 900px) {
+  .split__marca { padding: 40px 56px; justify-content: space-between; }
+  .split__fichas { display: block; }
+}
+
+.split__form { display: grid; place-items: center; padding: 32px 16px 48px; }
+.login__caja {
+  width: 100%; max-width: 400px; background: var(--blanco); color: var(--texto); padding: 32px 28px;
+  border-radius: 18px; box-shadow: 0 14px 40px rgba(11, 46, 111, 0.12); border-top: 6px solid var(--acento);
+}
+.login__caja h1 { margin: 4px 0 0; font-size: 1.7rem; }
+.login__etiqueta {
+  display: inline-block; margin: 0; padding: 3px 12px; border-radius: 999px; font-weight: 700; font-size: 0.75rem;
+  text-transform: uppercase; letter-spacing: 0.08em; color: var(--acento);
+  background: color-mix(in srgb, var(--acento) 12%, white);
+}
+.login__sub { color: var(--texto-suave); margin: 6px 0 22px; }
+.campo--icono { position: relative; }
+.campo--icono input { padding-left: 40px !important; height: 46px; border-radius: 10px !important; }
+.campo--icono svg {
+  position: absolute; left: 12px; top: 43px; width: 18px; height: 18px;
+  fill: none; stroke: var(--texto-suave); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; pointer-events: none;
+}
+.campo--icono input:focus { border-color: var(--acento) !important; outline: 3px solid color-mix(in srgb, var(--acento) 18%, white) !important; }
+.login__caja .boton--ancho { height: 48px; font-size: 1.05rem; margin-top: 4px; }
+.login__ayuda { font-size: 0.85rem; color: var(--texto-suave); margin: 14px 0 0; text-align: center; }
+.login__volver { text-align: center; margin: 12px 0 0; font-size: 0.9rem; }
+.login__volver a { color: var(--acento); font-weight: 600; }
+
+/* Pantalla simple centrada (cambio de contraseña) */
+.login { min-height: calc(100vh - 34px); display: grid; place-items: center; padding: 16px; }
+.login .login__caja h1 { font-size: 1.4rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  .ficha, .fondo-marca::before { animation: none; }
+  .acceso, .boton { transition: none; }
+}

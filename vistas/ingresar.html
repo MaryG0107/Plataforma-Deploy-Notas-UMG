@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Ingresar — Plataforma de notas</title>
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/portal.css">
+  <link rel="stylesheet" href="assets/css/acceso.css">
+  <script src="assets/js/comun.js" defer></script>
+  <script src="assets/js/ingresar.js" defer></script>
+</head>
+<body class="pagina-acceso">
+  <div class="aviso-proyecto" role="note">Proyecto estudiantil · No es un sistema oficial · Datos ficticios</div>
+  <!-- Los textos y el color se ajustan según ?tipo= (estudiante, docente o admin) en ingresar.js. -->
+  <div class="split">
+    <aside class="split__marca fondo-marca">
+      <a class="split__volver" href="./">← Volver al inicio</a>
+      <div class="split__titulo">
+        <img class="marca-logo" src="assets/img/logo-umg.png" alt="Logo Universidad Mariano Gálvez de Guatemala" width="56" height="56">
+        <h2>Plataforma de notas <small>Sede Central</small></h2>
+      </div>
+      <p class="split__lema" id="login-lema">Tus notas, en cuanto se publican.</p>
+
+      <!-- Vista previa decorativa con datos de ejemplo. -->
+      <div class="split__fichas" aria-hidden="true">
+        <div class="ficha ficha--a">
+          <div class="ficha__cabeza">
+            <span class="ficha__curso">Programación I<span class="ficha__codigo">PROG-101 · Sección A</span></span>
+            <span class="estado-pill estado-pill--publicado">Aprobado</span>
+          </div>
+          <div class="ficha__total">87 <small>/ 100</small></div>
+          <div class="barra-progreso barra-progreso--87"><span></span></div>
+          <span class="ficha__ejemplo">Ejemplo</span>
+        </div>
+        <div class="ficha ficha--b">
+          <div class="ficha__aviso">
+            <span class="ficha__check"><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg></span>
+            <span>Notas publicadas<small>Matemática I · hace un momento</small></span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="split__form">
+      <form class="login__caja" id="form-login" novalidate>
+        <p class="login__etiqueta" id="login-etiqueta">Estudiantes</p>
+        <h1 id="login-titulo">Ver mis notas</h1>
+        <p class="login__sub" id="login-sub">Ingresá con tu carné y contraseña.</p>
+
+        <div class="campo campo--icono">
+          <label for="usuario" id="usuario-etiqueta">Carné</label>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+          <input id="usuario" name="usuario" type="text" autocomplete="username" required minlength="3" maxlength="50">
+          <p class="campo__error" id="error-usuario"></p>
+        </div>
+        <div class="campo campo--icono">
+          <label for="clave">Contraseña</label>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+          <input id="clave" name="clave" type="password" autocomplete="current-password" required maxlength="200">
+          <p class="campo__error" id="error-clave"></p>
+        </div>
+
+        <p class="mensaje" id="mensaje" role="alert"></p>
+        <button class="boton boton--acento boton--ancho" type="submit" id="btn-ingresar">Ingresar</button>
+        <p class="login__ayuda">¿Olvidaste tu contraseña? Solicitá un restablecimiento a la administración.</p>
+        <p class="login__volver"><a href="ingresar?tipo=docente" id="login-otro">Soy catedrático</a></p>
+      </form>
+    </main>
+  </div>
+</body>
+</html>

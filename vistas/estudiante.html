@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Mis notas — Plataforma de notas</title>
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/portal.css">
+  <script src="assets/js/comun.js" defer></script>
+  <script src="assets/js/estudiante.js" defer></script>
+</head>
+<body class="admin">
+  <div class="aviso-proyecto" role="note">Sistema de práctica estudiantil · No es un sistema oficial · Las notas mostradas no tienen validez</div>
+  <header class="barra">
+    <div class="contenedor barra__fila">
+      <div class="barra__marca">
+        <img src="assets/img/logo-umg.png" alt="" width="36" height="36">
+        <span>Plataforma de notas</span>
+      </div>
+      <div class="barra__acciones">
+        <span class="barra__usuario" id="usuario-actual"></span>
+        <button class="boton boton--claro boton--chico" type="button" id="btn-imprimir">Imprimir</button>
+        <button class="boton boton--rojo boton--chico" type="button" id="btn-salir">Cerrar sesión</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="contenedor panel">
+    <p class="mensaje" id="mensaje" role="status" aria-live="polite"></p>
+    <section class="bienvenida fondo-marca" aria-labelledby="t-notas">
+      <div>
+        <p class="bienvenida__hola" id="saludo">Hola</p>
+        <h1 id="t-notas">Mis notas</h1>
+        <p class="bienvenida__info" id="info-estudiante"></p>
+      </div>
+      <div class="bienvenida__datos" id="resumen-estudiante"></div>
+    </section>
+    <div id="lista-notas"><p class="cargando">Cargando…</p></div>
+
+    <details class="cuenta no-imprimir">
+      <summary>Cambiar mi contraseña</summary>
+      <form id="form-clave" class="formulario" novalidate>
+        <div class="formulario__fila">
+          <div class="campo"><label for="clave-actual">Contraseña actual</label><input id="clave-actual" name="actual" type="password" autocomplete="current-password" required maxlength="200"></div>
+          <div class="campo"><label for="clave-nueva">Nueva contraseña (mínimo 12)</label><input id="clave-nueva" name="nueva" type="password" autocomplete="new-password" required minlength="12" maxlength="200"></div>
+          <div class="campo"><label for="clave-repetir">Repetir nueva contraseña</label><input id="clave-repetir" name="repetir" type="password" autocomplete="new-password" required minlength="12" maxlength="200"></div>
+        </div>
+        <button class="boton boton--rojo" type="submit">Actualizar contraseña</button>
+      </form>
+    </details>
+  </main>
+</body>
+</html>
