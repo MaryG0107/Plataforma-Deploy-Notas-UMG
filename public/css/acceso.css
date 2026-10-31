@@ -58,6 +58,10 @@
 .hero h1 { color: var(--blanco); font-size: clamp(2rem, 5vw, 3.3rem); line-height: 1.1; margin: 16px 0; letter-spacing: -0.01em; }
 .hero h1 em { font-style: normal; background: linear-gradient(90deg, #ff9aa9, #ffd1d8); -webkit-background-clip: text; background-clip: text; color: transparent; }
 .hero__lema { font-size: 1.15rem; opacity: 0.9; max-width: 46ch; margin: 0; }
+.hero__actualizado {
+  display: inline-block; margin: 16px 0 0; padding: 4px 12px; border-radius: 999px;
+  background: var(--blanco); color: var(--azul-oscuro); font-size: 0.9rem; font-weight: 700;
+}
 
 .hero__vista { position: relative; height: 330px; display: none; }
 .hero__vista .ficha { position: absolute; }
